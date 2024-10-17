@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>People 1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #f75464;}
+.s5 { color: #cf8e6d;}
+.s6 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+People 1.py</font>
+</center></td></tr></table>
+<pre><span class="s0">## List all people</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">().</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## Count all people</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">countDocuments</span><span class="s2">()</span>
+
+<span class="s0">## List all people in Arizona</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">state</span><span class="s2">: </span><span class="s3">&quot;Arizona&quot; </span><span class="s2">}).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List all males in Arizona</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">state</span><span class="s2">: </span><span class="s3">&quot;Arizona&quot;</span><span class="s2">, </span><span class="s1">gender</span><span class="s2">: </span><span class="s3">&quot;male&quot; </span><span class="s2">}).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List all people in Arizona plus New Mexico</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">state</span><span class="s2">: { </span><span class="s4">$</span><span class="s5">in</span><span class="s2">: [</span><span class="s3">&quot;Arizona&quot;</span><span class="s2">, </span><span class="s3">&quot;New Mexico&quot;</span><span class="s2">] } }).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List all people under age 40</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">age</span><span class="s2">: { </span><span class="s4">$</span><span class="s1">lt</span><span class="s2">: </span><span class="s6">40 </span><span class="s2">} }).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List all females in Florida between the ages of 40 and 45 (inclusive)</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">state</span><span class="s2">: </span><span class="s3">&quot;Florida&quot;</span><span class="s2">, </span><span class="s1">gender</span><span class="s2">: </span><span class="s3">&quot;female&quot;</span><span class="s2">, </span><span class="s1">age</span><span class="s2">: { </span><span class="s4">$</span><span class="s1">gte</span><span class="s2">: </span><span class="s6">40</span><span class="s2">, </span><span class="s4">$</span><span class="s1">lte</span><span class="s2">: </span><span class="s6">45 </span><span class="s2">} }).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List people whose first name starts with &quot;H&quot;</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">firstName</span><span class="s2">: { </span><span class="s4">$</span><span class="s1">regex</span><span class="s2">: /^</span><span class="s1">H</span><span class="s2">/, </span><span class="s4">$</span><span class="s1">options</span><span class="s2">: </span><span class="s3">'i' </span><span class="s2">} }).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List all people in Michigan, sorted by first name</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">state</span><span class="s2">: </span><span class="s3">&quot;Michigan&quot; </span><span class="s2">}).</span><span class="s1">sort</span><span class="s2">({ </span><span class="s1">firstName</span><span class="s2">: </span><span class="s6">1 </span><span class="s2">}).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List all people who live in Virginia or are named Virginia</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s4">$</span><span class="s5">or</span><span class="s2">: [{ </span><span class="s1">state</span><span class="s2">: </span><span class="s3">&quot;Virginia&quot; </span><span class="s2">}, { </span><span class="s1">firstName</span><span class="s2">: </span><span class="s3">&quot;Virginia&quot; </span><span class="s2">}] }).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List the names of people under age 30. Only display their first and last name</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">age</span><span class="s2">: { </span><span class="s4">$</span><span class="s1">lt</span><span class="s2">: </span><span class="s6">30 </span><span class="s2">} }, { </span><span class="s1">firstName</span><span class="s2">: </span><span class="s6">1</span><span class="s2">, </span><span class="s1">lastName</span><span class="s2">: </span><span class="s6">1</span><span class="s2">, </span><span class="s1">_id</span><span class="s2">: </span><span class="s6">0 </span><span class="s2">}).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List all people in Montana. Display all information except age</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">state</span><span class="s2">: </span><span class="s3">&quot;Montana&quot; </span><span class="s2">}, { </span><span class="s1">age</span><span class="s2">: </span><span class="s6">0 </span><span class="s2">}).</span><span class="s1">pretty</span><span class="s2">()</span>
+
+<span class="s0">## List the email addresses of people with a &quot;.edu&quot; email. Only display the email</span>
+<span class="s1">db</span><span class="s2">.</span><span class="s1">people</span><span class="s2">.</span><span class="s1">find</span><span class="s2">({ </span><span class="s1">email</span><span class="s2">: { </span><span class="s4">$</span><span class="s1">regex</span><span class="s2">: /</span><span class="s1">\</span><span class="s2">.</span><span class="s1">edu</span><span class="s4">$</span><span class="s2">/ } }, { </span><span class="s1">email</span><span class="s2">: </span><span class="s6">1</span><span class="s2">, </span><span class="s1">_id</span><span class="s2">: </span><span class="s6">0 </span><span class="s2">}).</span><span class="s1">pretty</span><span class="s2">()</span>
+</pre>
+</body>
+</html>
